@@ -82,7 +82,7 @@ def main():
         databaseobjects.append(monogram)
 
     for i in databaseobjects:
-        matching_result, matches = start_matching(img1, i.imgdata, kp1, i.keypoint, desc1, i.descriptor, True)
+        matching_result, matches = start_matching(img1, i.imgdata, kp1, i.keypoint, desc1, i.descriptor, False)
         #numberofkeypoints = chooselowervalue(len(kp1),len(i.keypoint))
         #precision = len(matches)/numberofkeypoints
         precision = len(matches)/ len(i.keypoint)
@@ -93,10 +93,9 @@ def main():
 
     databaseobjects = sorted(databaseobjects, key=lambda x: x.precision)
 
-    print(databaseobjects[-1].precision)
-    print(databaseobjects[-2].precision)
+    print(len(databaseobjects[-1].matches))
+    print(len(databaseobjects[-1].keypoint))
     print(databaseobjects[-3].precision)
-    print(databaseobjects[-4].precision)
 
     # plt.imshow(end_result)
     # plt.show()
