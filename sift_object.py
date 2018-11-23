@@ -10,6 +10,7 @@ class sift_object:
         self.precision = None
         self.matching_result = None
         self.matches = None
+        self.ratio = None
 
     def calculate_precision(self, matches, keypoints):
         self.precision = matches / keypoints

@@ -12,6 +12,8 @@ def chooselowervalue(x,y):
     else:
         return x
 
+def invertiere(x):
+    return 1/x if x > 1 else x
 
 def find_files(directory):
     global filenames
@@ -82,26 +84,32 @@ def main():
         databaseobjects.append(monogram)
 
     for i in databaseobjects:
-        matching_result, matches = start_matching(img1, i.imgdata, kp1, i.keypoint, desc1, i.descriptor, False)
-        #numberofkeypoints = chooselowervalue(len(kp1),len(i.keypoint))
-        #precision = len(matches)/numberofkeypoints
-        precision = len(matches)/ len(i.keypoint)
-        i.precision = precision
+        matching_result, matches = start_matching(img1, i.imgdata, kp1, i.keypoint, desc1, i.descriptor, True)
+        ratio  = len(kp1) / len(i.keypoint)
+        ratio = invertiere(ratio)
+        i.precision = (len(matches)/ len(kp1))*ratio
+        i.ratio = ratio
         i.matching_result = matching_result
         i.matches = matches
 
 
     databaseobjects = sorted(databaseobjects, key=lambda x: x.precision)
 
-    print(len(databaseobjects[-1].matches))
-    print(len(databaseobjects[-1].keypoint))
-    print(databaseobjects[-3].precision)
+    result1 = databaseobjects[-1].matching_result
+    result2 = databaseobjects[-2].matching_result
+    result3 = databaseobjects[-3].matching_result
 
-    # plt.imshow(end_result)
-    # plt.show()
+    plt.imshow(result1)
+    plt.show()
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    plt.imshow(result2)
+    plt.show()
+
+    plt.imshow(result3)
+    plt.show()
+
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
 
 
