@@ -18,6 +18,8 @@ def clear():
     cv.delete("all")
     draw.rectangle((0, 0, 200, 200), fill=(255, 255, 255, 1))
 
+def close():
+    root.destroy()
 
 def paint(event):
     # python_green = "#476042"
@@ -52,5 +54,6 @@ button=Button(text="save",command=save)
 button.pack()
 button2=Button(text="clear",command=clear)
 button2.pack(side = "left")
-
+button3=Button(text="close", command=close)
+button3.pack(side = "right")
 root.mainloop()

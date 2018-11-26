@@ -3,6 +3,8 @@ import os
 from sift_object import sift_object
 from matplotlib import pyplot as plt
 import numpy as np
+from gui import resultwindow
+import tkinter
 ####https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html
 
 
@@ -71,7 +73,7 @@ def main():
     databaseobjects = []
     directory = "C:/Users/Hyu/PycharmProjects/OpenCV/monograms"
 
-    img1 = cv2.imread("byzturn.jpg", cv2.IMREAD_GRAYSCALE)
+    img1 = cv2.imread("Mar_Mon_020.tif", cv2.IMREAD_GRAYSCALE)
     sift = cv2.xfeatures2d.SIFT_create()
     kp1, desc1 = sift.detectAndCompute(img1, None)
 
@@ -98,16 +100,9 @@ def main():
     result1 = databaseobjects[-1].matching_result
     result2 = databaseobjects[-2].matching_result
     result3 = databaseobjects[-3].matching_result
-
-    plt.imshow(result1)
-    plt.show()
-
-    plt.imshow(result2)
-    plt.show()
-
-    plt.imshow(result3)
-    plt.show()
-
+    list = [result1,result2,result3]
+    gui = resultwindow(tkinter.Tk(),"Ergebnisse",list)
+    gui.showWindow()
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 

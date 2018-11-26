@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 import numpy as np
 ####https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html
 
+def invertiere(x):
+    return 1/x if x > 1 else x
 
 def chooselowervalue(x,y):
     if x > y:
@@ -34,7 +36,7 @@ def main():
     databaseobjects = []
     directory = "C:/Users/Hyu/PycharmProjects/OpenCV/monograms"
 
-    img1 = cv2.imread("byzturn.jpg", cv2.IMREAD_GRAYSCALE)
+    img1 = cv2.imread("test.png", cv2.IMREAD_GRAYSCALE)
     orb = cv2.ORB_create()
     kp1, desc1 = orb.detectAndCompute(img1, None)
 
@@ -47,25 +49,39 @@ def main():
         databaseobjects.append(monogram)
 
     for i in databaseobjects:
+        print(i.imgname)
+
         matching_result, matches = start_matching(img1, i.imgdata, kp1, i.keypoint, desc1, i.descriptor)
-        precision = 0 if len(i.keypoint) == 0 else len(matches)/ len(i.keypoint)
-        i.precision = precision
+        ratio = len(kp1) / len(i.keypoint)
+        ratio = invertiere(ratio)
+        i.precision = (len(matches) / len(kp1)) * ratio
+        i.ratio = ratio
         i.matching_result = matching_result
         i.matches = matches
 
 
     databaseobjects = sorted(databaseobjects, key=lambda x: x.precision)
 
-    object = databaseobjects[-10]
-    print(len(object.keypoint))
-    testresult = cv2.drawKeypoints(object.imgdata, object.keypoint, None, flags=2)
-    plt.imshow(testresult)
+    result1 = databaseobjects[-1].matching_result
+    result2 = databaseobjects[-2].matching_result
+    result3 = databaseobjects[-3].matching_result
+    result4 = databaseobjects[-4].matching_result
+    result5 = databaseobjects[-5].matching_result
+
+    plt.imshow(result1)
     plt.show()
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    plt.imshow(result2)
+    plt.show()
 
+    plt.imshow(result3)
+    plt.show()
 
+    plt.imshow(result4)
+    plt.show()
+
+    plt.imshow(result5)
+    plt.show()
 
 
 if __name__ == "__main__":
