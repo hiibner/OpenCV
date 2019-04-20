@@ -2,21 +2,23 @@
 from PIL import ImageTk, Image, ImageDraw
 import PIL
 from tkinter import *
+import os
 
-width = 200
-height = 200
+width = 500
+height = 500
 center = height//2
 white = (255, 255, 255)
 green = (0,128,0)
 
 def save():
-    filename = "image.png"
-
+    filename = "my_drawing.png"
+    if os.path.exists(filename):
+        os.remove(filename)
     image1.save(filename)
-
+    root.destroy()
 def clear():
     cv.delete("all")
-    draw.rectangle((0, 0, 200, 200), fill=(255, 255, 255, 1))
+    draw.rectangle((0, 0, 500, 500), fill=(255, 255, 255, 1))
 
 def close():
     root.destroy()
@@ -44,12 +46,14 @@ draw = ImageDraw.Draw(image1)
 cv.pack(expand=YES, fill=BOTH)
 
 # do the PIL image/draw (in memory) drawings
-# draw.line([0, center, width, center], green)
+#draw.line([0, center, width, center], green)
 
 cv.bind("<B1-Motion>", paint)
 # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
-# filename = "my_drawing.png"
-# image1.save(filename)
+
+#filename = "my_drawing.png"
+#image1.save(filename)
+
 button=Button(text="save",command=save)
 button.pack()
 button2=Button(text="clear",command=clear)

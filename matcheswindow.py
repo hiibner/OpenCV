@@ -31,11 +31,11 @@ class Matcheswindow(Ui_matcheswindow):
 
         #Modifizierte Bilder die zum Input gematched wurden
 
-        self.match1_modified = convert(resize(self.mainwindow_object.top5Objects[0].img_data_modified, 150))
-        self.match2_modified = convert(resize(self.mainwindow_object.top5Objects[1].img_data_modified, 150))
-        self.match3_modified = convert(resize(self.mainwindow_object.top5Objects[2].img_data_modified, 150))
-        self.match4_modified = convert(resize(self.mainwindow_object.top5Objects[3].img_data_modified, 150))
-        self.match5_modified = convert(resize(self.mainwindow_object.top5Objects[4].img_data_modified, 150))
+        self.match1_modified = convert(resize(self.mainwindow_object.top5Objects[0].img_data_skeleton, 150))
+        self.match2_modified = convert(resize(self.mainwindow_object.top5Objects[1].img_data_skeleton, 150))
+        self.match3_modified = convert(resize(self.mainwindow_object.top5Objects[2].img_data_skeleton, 150))
+        self.match4_modified = convert(resize(self.mainwindow_object.top5Objects[3].img_data_skeleton, 150))
+        self.match5_modified = convert(resize(self.mainwindow_object.top5Objects[4].img_data_skeleton, 150))
 
 
         #Matching Ergebnisse der Einzelnen Matches
@@ -72,7 +72,7 @@ class Matcheswindow(Ui_matcheswindow):
             self.skel4.setPixmap(QPixmap(self.match4_modified))
             self.skel5.setPixmap(QPixmap(self.match5_modified))
 
-            self.skel_input.setPixmap(QPixmap(convert(resize(self.mainwindow_object.input_sift_object.img_data_modified, 300))))
+            self.skel_input.setPixmap(QPixmap(convert(resize(self.mainwindow_object.input_sift_object.img_data_skeleton, 300))))
 
 
         # VorschauNamen

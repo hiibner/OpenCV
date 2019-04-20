@@ -3,6 +3,17 @@ import numpy as np
 
 
 def skeletonize(img):
+    #um korrekte Schwarz werte von 255 zu bekommen
+    # counterX = 0
+    # counterY = 0
+    # for x in img:
+    #     counterY = 0
+    #     for y in x:
+    #         if y != 0:
+    #             img[counterX][counterY] = 255
+    #         counterY = counterY + 1
+    #     counterX = counterX + 1
+
     img = cv2.bitwise_not(img)
 
     size = np.size(img)
@@ -20,17 +31,17 @@ def skeletonize(img):
         temp = cv2.subtract(img, temp)
         skel = cv2.bitwise_or(skel, temp)
         img = eroded.copy()
-
+        a=cv2.countNonZero(img)
         zeros = size - cv2.countNonZero(img)
         if zeros == size:
             done = True
 
 
 
-    # FOR THICKER  LINES
-    # for i in range(3):
-    #     skel = cv2.dilate(skel, element)
-    ######################################
+  #  FOR THICKER  LINES
+  #   for i in range(2):
+  #       skel = cv2.dilate(skel, element)
+    #####################################
 
     skel = cv2.bitwise_not(skel)
 

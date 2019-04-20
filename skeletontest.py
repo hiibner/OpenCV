@@ -3,31 +3,37 @@ from skeletonizer import skeletonize
 from tkinter import *
 from tkinter import filedialog
 from imgreader import start_matching
-
+import numpy as np
 
 
 root = Tk()
 root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
 input1 = root.filename
 
-img1 = cv2.imread("monograms/Adra_02.png", cv2.IMREAD_GRAYSCALE)
-img1 = skeletonize(img1)
-
+global img2
 img2 = cv2.imread(input1, cv2.IMREAD_GRAYSCALE)
+print(img2)
+# counterX = 0
+# counterY = 0
+# for x in img2:
+#     counterY = 0
+#     for y in x:
+#         if y!=0:
+#             img2[counterX][counterY]=255
+#         counterY = counterY+1
+#     counterX = counterX+1
+
+
+# img2 = cv2.ximgproc.thinning(img2, thinningType=cv2.ximgproc.THINNING_ZHANGSUEN)
+# img2 = cv2.bitwise_not(img2)
+#
 img2 = skeletonize(img2)
 
-sift = cv2.xfeatures2d.SIFT_create()
-kp1, desc1 = sift.detectAndCompute(img1, None)
-kp2, desc2 = sift.detectAndCompute(img2, None)
-print(len(kp1))
-print(len(kp2))
-print(len(desc1))
-print(len(desc2))
-matching_result, matches = start_matching(img1, img2, kp1, kp2, desc1, desc2, True)
-print(len(matches))
 
-cv2.imshow("test", matching_result)
+
+cv2.imshow("test", img2)
 cv2.waitKey(0)
+
 cv2.destroyAllWindows()
 
 
