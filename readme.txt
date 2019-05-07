@@ -1,33 +1,33 @@
-Schritt1: „mainwindow.py“ ausführen / Alternativ Monogrammrecognition.exe ausführen
+Schritt1: â€žmainwindow.pyâ€œ ausfÃ¼hren / Alternativ Monogrammrecognition.exe ausfÃ¼hren
 
-Schritt2: Monogramm-Verzeichnis oder Pickle-Datei(dict.pickle) auswählen.
+Schritt2: Monogramm-Verzeichnis oder Pickle-Datei(dict.pickle) auswÃ¤hlen.
 
-Schritt3: Inputmonogramm auswählen.
+Schritt3: Inputmonogramm auswÃ¤hlen.
 
 Optional: Ratio Test / Skeletttierung Aktivieren.
 
 Schritt4: Auswerten klicken.
 
 =============================================================================
-Transparenz löschen und ins PNG-Format Konvertieren:
+Transparenz lÃ¶schen und ins PNG-Format Konvertieren:
 
-"deletetransparency.py" ausführen.
+"deletetransparency.py" ausfÃ¼hren.
 
-Schritt1: Inputordner mit Bildern auswählen.
+Schritt1: Inputordner mit Bildern auswÃ¤hlen.
 
-Schritt2: Gewünschten Outputordner wählen.
+Schritt2: GewÃ¼nschten Outputordner wÃ¤hlen.
 
 =============================================================================
 SVG zu PNG Konvertieren:
 
-"convertSVGtoPNG.py" ausführen.
+"convertSVGtoPNG.py" ausfÃ¼hren.
 
-Schritt1: Inputordner mit SVG-Bildern auswählen.
+Schritt1: Inputordner mit SVG-Bildern auswÃ¤hlen.
 
-Schritt2: Gewünschten Outputordner wählen.
+Schritt2: GewÃ¼nschten Outputordner wÃ¤hlen.
 
 
-Monogrammrecognition ist unter:
+Monogrammrecognition.exe ist unter:
 
 https://drive.google.com/open?id=1-4kF-Xkz8V0HuG2uVd2psRR99_YiQ-3E
 
