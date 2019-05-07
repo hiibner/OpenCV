@@ -15,62 +15,26 @@ import wand.image
 from wand.image import Image
 from PIL import Image
 from imgreader import find_files
-# =============================================================================
-
-# files = find_files("mono")
-#
-# file_modified = files[0].split('.')[0]
-#
-#
-# for i in files:
-#     file_modified = i.split('.')[0]
-#
-#     Image.open("mono/"+i).save('monoconverted/'+file_modified+'.png', 'PNG')
-
-# GIF to PNG
-#######
-#DELETE TRANSPARENCY
+from tkinter import filedialog
+from tkinter import *
 from PIL import Image
+# =============================================================================
+#DELETE TRANSPARENCY and CONVERT to PNG
 
+root = Tk()
+root.withdraw()
 
+current_directory = filedialog.askdirectory(title="Inputordner")
+destination = filedialog.askdirectory(title="Zielordner")
 
-files = find_files("SVGtoPNG")
-
+files = find_files(current_directory)
 file_modified = files[0].split('.')[0]
 
 
 for i in files:
     file_modified = i.split('.')[0]
-    image = Image.open('SVGtoPNG/'+i).convert("RGBA")
+    image = Image.open(current_directory+'/'+i).convert("RGBA")
     new_image = Image.new("RGBA", image.size, "WHITE") # Create a white rgba background
     new_image.paste(image, (0, 0), image)              # Paste the image on the background. Go to the links given below for details.
-    new_image.convert('RGB').save('SVGtoPNGtoRGB/'+file_modified+'.png', "PNG")
+    new_image.convert('RGB').save(destination+'/'+file_modified+'.png', "PNG")
 
-###################
-#Copyright©: https://stackoverflow.com/questions/6589358/convert-svg-to-png-in-python/19718153\#19718153
-#Convert SVG to PNG
-
-# matches = []
-# for root, dirnames, filenames in os.walk('Datenbank_Monogramme'):
-#     for filename in fnmatch.filter(filenames, '*.svg'):
-#         matches.append(os.path.join(root, filename))
-#
-# for x in matches:
-#     head,tail = os.path.split(x)
-#     filename, ext =  os.path.splitext(tail)
-#     outputname = filename + ".png"
-#     with open(x) as f:
-#         image_binary = f.read()
-#
-#     svg_blob = image_binary.encode('utf-8')
-#
-#
-#     with wand.image.Image() as image:
-#         with wand.color.Color('transparent') as background_color:
-#             library.MagickSetBackgroundColor(image.wand,
-#                                              background_color.resource)
-#         image.read(blob=svg_blob)
-#         png_image = image.make_blob("png32")
-#
-#     with open("SVGtoPNG"+"\\"+outputname, "wb") as out:
-#         out.write(png_image)
