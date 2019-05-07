@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# =============================================================================
+# Imports
 from detailedwindow_gui import Ui_detailedwindow
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
@@ -6,6 +14,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import sys, os
+# =============================================================================
 
 
 class Detailedwindow(Ui_detailedwindow):

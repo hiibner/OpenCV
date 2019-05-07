@@ -1,19 +1,20 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# Inspired: http://opencvpython.blogspot.com/2012/05/skeletonization-using-opencv-python.html
+# License: GNU GPL
+# =============================================================================
+# Imports
 import cv2
 import numpy as np
+# =============================================================================
 
+#Copyright© http://opencvpython.blogspot.com/2012/05/skeletonization-using-opencv-python.html
 
 def skeletonize(img):
-    #um korrekte weiß werte von 255 zu bekommen
-    # counterX = 0
-    # counterY = 0
-    # for x in img:
-    #     counterY = 0
-    #     for y in x:
-    #         if y != 0:
-    #             img[counterX][counterY] = 255
-    #         counterY = counterY + 1
-    #     counterX = counterX + 1
-
+    #invert the inputimage
     img = cv2.bitwise_not(img)
 
     size = np.size(img)
@@ -41,8 +42,9 @@ def skeletonize(img):
   #  FOR THICKER  LINES
   #   for i in range(2):
   #       skel = cv2.dilate(skel, element)
-    #####################################
+  ######################################
 
+    #invert again to get a black image on white background
     skel = cv2.bitwise_not(skel)
 
 

@@ -5,9 +5,16 @@
 # Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# =============================================================================
+# Imports
 from PyQt5 import QtCore, QtGui, QtWidgets
+# =============================================================================
 
+#AUTO-GENERATED GUI-File
 class Ui_matcheswindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")

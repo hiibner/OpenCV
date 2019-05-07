@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# =============================================================================
+# Imports
 from __future__ import print_function
 import fnmatch
 import os
@@ -7,6 +15,7 @@ import wand.image
 from wand.image import Image
 from PIL import Image
 from imgreader import find_files
+# =============================================================================
 
 # files = find_files("mono")
 #
@@ -38,7 +47,7 @@ for i in files:
     new_image.convert('RGB').save('SVGtoPNGtoRGB/'+file_modified+'.png', "PNG")
 
 ###################
-
+#Copyright©: https://stackoverflow.com/questions/6589358/convert-svg-to-png-in-python/19718153\#19718153
 #Convert SVG to PNG
 
 # matches = []

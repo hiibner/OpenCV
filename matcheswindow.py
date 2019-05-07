@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# =============================================================================
+# Imports
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from PyQt5 import QtGui
@@ -9,6 +17,7 @@ from detailedwindow import Detailedwindow
 import cv2
 from matcheswindow_gui import Ui_matcheswindow
 import sys, os
+# =============================================================================
 
 class Matcheswindow(Ui_matcheswindow):
     def __init__(self, input_window, mainwindow_object, modified=False):

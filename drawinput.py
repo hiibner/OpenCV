@@ -1,8 +1,14 @@
-
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# Inspired by Copyright© https://drive.google.com/file/d/0B8Qjj40Go4-UOGJrUmNwV0NoeTA/view
+# License: GNU GPL
+# =============================================================================
+# Imports
 from PIL import ImageTk, Image, ImageDraw
 import PIL
 from tkinter import *
 import os
+# =============================================================================
 
 width = 500
 height = 500
@@ -51,8 +57,6 @@ cv.pack(expand=YES, fill=BOTH)
 cv.bind("<B1-Motion>", paint)
 # PIL image can be saved as .png .jpg .gif or .bmp file (among others)
 
-#filename = "my_drawing.png"
-#image1.save(filename)
 
 button=Button(text="save",command=save)
 button.pack()

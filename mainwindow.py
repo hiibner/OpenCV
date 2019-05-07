@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# =============================================================================
+# Imports
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from PyQt5 import QtGui
@@ -12,8 +20,8 @@ from resizer import resize, convert
 import os
 from mainwindow_gui import Ui_mainwindow
 import sys, os
-
 import time
+# =============================================================================
 
 
 class Mainwindow(Ui_mainwindow):
@@ -115,7 +123,7 @@ class Mainwindow(Ui_mainwindow):
             if self.skelCheckBox.isChecked():
                 skel = True
 
-            input_sift_object, database_objects = analyzer(self.input_img, self.input_file_name, knn, skel, res, self.input_directory, self, self.serialized_path)
+            input_sift_object, database_objects = analyzer(self.input_img, self.input_file_name, knn, skel, self.input_directory, self, self.serialized_path)
 
             self.input_sift_object = input_sift_object
             self.top5Objects = database_objects[:5]

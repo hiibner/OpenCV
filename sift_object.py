@@ -1,13 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# =============================================================================
+# Imports
 import cv2
 import numpy as np
-
-
-
-#matching_result ----> das img des matchings
-#matches ----> die Keypoints die gematched wurden
+# =============================================================================
 
 class SiftObject:
     def __init__(self, imgname, imgdata, keypoint, descriptor):
+        """
+
+        :param matching_result: An visualised image of the matching
+        :param matches: List of the matched keypoints
+        :param ratio: ratio of the keypoints of inputimage and compared image
+        :param precision: Value of similarity to inputimage
+        """
         self.imgname = imgname
         self.imgdata = imgdata
         self.img_data_skeleton = None
@@ -21,11 +32,9 @@ class SiftObject:
         self.ratio = None
         self.isencoded = False
 
-    def calculate_precision(self, matches, keypoints):
-        self.precision = matches / keypoints
 
 
-
+    #encode the keypoints. Necessary to serialize the objects
     def encodeKeypointsToPickle(self):
         converted_keypoints = []
         converted_keypoints_skeleton = []
@@ -45,6 +54,7 @@ class SiftObject:
 
         self.isencoded = True
 
+    #Decode the keypoints
     def decodePickleToKeypoints(self):
         decoded_keypoints = []
         decoded_keypoints_skeleton = []

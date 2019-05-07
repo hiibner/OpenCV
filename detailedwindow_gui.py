@@ -1,6 +1,16 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# =============================================================================
+# Imports
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
+# =============================================================================
 
+#AUTO-GENERATED GUI-File
 class Ui_detailedwindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")

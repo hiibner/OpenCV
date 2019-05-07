@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# License: GNU GPL
+# Inspired: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html
+# =============================================================================
+# Imports
 import cv2
 import os
 from sift_object import SiftObject
@@ -5,39 +14,42 @@ from skeletonizer import skeletonize
 from resizer import resize
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pickle
-# https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html
-
-
-def choose_lower_value(x, y):
-    if x > y:
-        return y
-    else:
-        return x
-
+# =============================================================================
 
 def invertiere(x):
+    """
+
+    :param x: ratio bigger or smaller than 1
+    :return: ratio smaller than 1
+    """
     return 1/x if x > 1 else x
 
 
 def find_files(directory):
+    """
+
+    :param directory: directory to traverse
+    :return: list of all files
+    """
     global filenames
     for filname in os.walk(directory):
         filenames = filname[2]
         break
     return filenames
 
-# img = cv2.drawKeypoints(img,keypoints,None)
-
-# ORB Detector
-# orb = cv2.ORB_create()
-# kp1, desc1 = orb.detectAndCompute(img1, None)
-# kp2, desc2 = orb.detectAndCompute(img2, None)
-
-# BruteForce SIFT
-# Brute Force Matching ERKLAERBEDARF WIESO NORMHAMMING / CROSSCHEC nur das beste matchin von der anderen descriptr menge
-
 
 def start_matching(img1, img2, kp1, kp2, desc1, desc2, knn=True):
+    """
+    matching the keypoints of 2 images
+    :param img1: imgdata of inputimage
+    :param img2: imgdata of databaseimages
+    :param kp1: keypoints of inputimage
+    :param kp2: keypoints of databaseimages
+    :param desc1: descriptors of inputimage
+    :param desc2: descriptors of databaseimage
+    :param knn: Bool--> activate ratiotest
+    :return: matching_result: matchingimage of to keypoints; matches/good_matches: list of matched Keypoints
+    """
     if knn:
         bf = cv2.BFMatcher(cv2.NORM_L2, crossCheck=False)
         matches = bf.knnMatch(desc1, desc2, k=2)
@@ -56,23 +68,23 @@ def start_matching(img1, img2, kp1, kp2, desc1, desc2, knn=True):
         matching_result = cv2.drawMatches(img1, kp1, img2, kp2, matches, None, flags=2)
         return matching_result, matches
 
-# fuer flann
-# index_params = dict(algorithm = 0, trees = 5)
-# search_params = dict()
-# flann = cv2.FlannBasedMatcher(index_params, search_params)
-# matches = flann.knnMatch(desc1,desc2,k=2)
-# good_points = []
-# for m, n in matches:
-#     if m.distance < 0.6*n.distance:
-#         good_points.append(m)
-
-# result = cv2.drawMatches(img1,kp1 ,img2, kp2, matching_result[:10], None, flags=2)
 
 
-def analyzer(input_file_data, input_file_name, knn, skel, res, database_directory, gui, pickle_path):
+def analyzer(input_file_data, input_file_name, knn, skel, database_directory, gui, pickle_path):
+    """
+
+    :param input_file_data: pixeldata of inputimage
+    :param input_file_name: filename of the inputimage
+    :param knn: Bool: activation of Ratio Test
+    :param skel: Bool: activation of Skeletonizer
+    :param database_directory: directory of the monogramms
+    :param gui: parameter of the gui
+    :param pickle_path: path of the picklefile
+    :return: input_sift_object: inputimage as SIFTObject; databaseobjects[]: ordered list of matched monogramms
+    """
     global databaseobjects
     databaseobjects = []
-    directory = database_directory   #"C:/Users/Hyu/PycharmProjects/OpenCV/monograms"
+    directory = database_directory
 
     img1 = input_file_data
 
@@ -81,7 +93,7 @@ def analyzer(input_file_data, input_file_name, knn, skel, res, database_director
     kp1, desc1 = sift.detectAndCompute(img1, None)
     input_sift_object = SiftObject(input_file_name, input_file_data, kp1, desc1)
 
-    #Skelettierung
+    #Skelettonizing the inputimage
     input_sift_object.img_data_skeleton = skeletonize(img1)
     kp_input_skel, desc_input_skel = sift.detectAndCompute(input_sift_object.img_data_skeleton, None)
     input_sift_object.keypoint_skeleton = kp_input_skel
@@ -89,40 +101,41 @@ def analyzer(input_file_data, input_file_name, knn, skel, res, database_director
 
 
     if pickle_path == None:
-
+        #Create Keypoints and Descriptors of Images
         files = find_files(directory)
 
 
-        #Iteriere über Gesamten Monogramm Ordner
+        #Progessbar of the GUI
         countersteps = 100 / len(files)
         counter = 0
+        # Iterate over monogrammfolder
         for i in files:
             databaseimg = cv2.imread(database_directory+ "/" + str(i), cv2.IMREAD_GRAYSCALE)
 
 
             kp, desc = sift.detectAndCompute(databaseimg, None)
 
-            # Um Matching fehler beim Skeletonizen zu entfernen
+            # remove images without keypoints
             if kp == [] and desc == None:
                 continue
 
-            # Um matching fehler beim Skeletonizen zu entfernen
+            # remove images with less than 2 keypoints
             if len(kp) == 1:
                 continue
 
             monogram = SiftObject(i, databaseimg, kp, desc)
 
-            #Skelett bilden
+            #Skelettonize monogramms of the folder
             monogram.img_data_skeleton = skeletonize(databaseimg)
             kp_skel, desc_skel = sift.detectAndCompute(monogram.img_data_skeleton, None)
             monogram.keypoint_skeleton = kp_skel
             monogram.descriptor_skeleton = desc_skel
 
-            # Um Matching fehler beim Skeletonizen zu entfernen
+            # remove images without keypoints
             if kp_skel == [] and desc_skel == None:
                 continue
 
-            # Um matching fehler beim Skeletonizen zu entfernen
+            # remove images with less than 2 keypoints
             if len(kp_skel) == 1:
                 continue
 
@@ -133,7 +146,7 @@ def analyzer(input_file_data, input_file_name, knn, skel, res, database_director
             gui.progressBar.setValue(counter)
 
 
-        # Serialisierung
+        # Serialisation
         for item in databaseobjects:
             item.encodeKeypointsToPickle()
         pickle_out = open("dict.pickle", "wb")
@@ -151,7 +164,7 @@ def analyzer(input_file_data, input_file_name, knn, skel, res, database_director
             item.decodePickleToKeypoints()
         databaseobjects = loaded_data
 
-
+    #Matching of each image of the monogramm folder with the input image
     for i in databaseobjects:
         database_image = i.imgdata
         kp_database_image = i.keypoint
@@ -179,6 +192,7 @@ def analyzer(input_file_data, input_file_name, knn, skel, res, database_director
         i.matching_result = matching_result
         i.matches = matches
 
+    #List of all monogramms matched with the inputimage
     databaseobjects = sorted(databaseobjects, key=lambda x: x.precision, reverse=True)
 
     return input_sift_object, databaseobjects

@@ -3,6 +3,7 @@
 # =============================================================================
 # Created By  : Huy Luong
 # Created Date: 07.05.2019
+# License: GNU GPL
 # =============================================================================
 # Imports
 import cv2
@@ -17,7 +18,9 @@ from PyQt5.QtWidgets import *
 
 #Copyright© resize vijay jha /https://stackoverflow.com/questions/44650888/resize-an-image-without-distortion-opencv/49208362#49208362
 def resize(image,square_size):
-
+    """
+    Resizes a image so a SQUARE with given size(param:square_size)
+    """
     height,width=image.shape
     if(height>width):
       differ=height
