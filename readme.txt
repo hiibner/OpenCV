@@ -1,5 +1,9 @@
-Schritt1: â€žMainwindow.pyâ€œ AusfÃ¼hren.
-Schritt2: Monogramm-Verzeichnis oder Pickle-Datei(dict.pickle) auswÃ¤hlen.
-Schritt3: Inputmonogramm auswÃ¤hlen.
-Optional: Ratio Test / Skeletttierung Aktivieren.
-Schritt4: Auswerten klicken.
+Schritt1: „mainwindow.py“ Ausführen.
+
+Schritt2: Monogramm-Verzeichnis oder Pickle-Datei(dict.pickle) auswählen.
+
+Schritt3: Inputmonogramm auswählen.
+
+Optional: Ratio Test / Skeletttierung Aktivieren.
+
+Schritt4: Auswerten klicken.
