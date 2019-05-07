@@ -20,6 +20,7 @@ from tkinter import *
 from PIL import Image
 # =============================================================================
 #DELETE TRANSPARENCY and CONVERT to PNG
+#Copyright: https://stackoverflow.com/a/50898375/11448315
 
 root = Tk()
 root.withdraw()
