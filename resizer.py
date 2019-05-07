@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Created By  : Huy Luong
+# Created Date: 07.05.2019
+# =============================================================================
+# Imports
 import cv2
 import numpy as np
 from PyQt5 import QtWidgets
@@ -6,8 +13,9 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+# =============================================================================
 
-#resize vijay jha /https://stackoverflow.com/questions/44650888/resize-an-image-without-distortion-opencv/49208362#49208362
+#Copyright© resize vijay jha /https://stackoverflow.com/questions/44650888/resize-an-image-without-distortion-opencv/49208362#49208362
 def resize(image,square_size):
 
     height,width=image.shape
@@ -30,8 +38,7 @@ def resize(image,square_size):
     return mask
 
 
-# convert and rgb2qimage von Dr. rer. nat. Hans Meine
-
+# convert and rgb2qimage Copyright© Dr. rer. nat. Hans Meine URL: https://kogs-www.informatik.uni-hamburg.de/~meine/software/vigraqt/qimage2ndarray.py
 def convert(gray):
     """Convert the 2D numpy array `gray` into a 8-bit QImage with a gray
     colormap.  The first dimension represents the vertical image axis."""

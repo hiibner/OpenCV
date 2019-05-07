@@ -18,7 +18,7 @@ from imgreader import find_files
 #
 #     Image.open("mono/"+i).save('monoconverted/'+file_modified+'.png', 'PNG')
 
-# GIF to JPG
+# GIF to PNG
 #######
 #DELETE TRANSPARENCY
 from PIL import Image

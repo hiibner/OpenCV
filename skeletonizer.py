@@ -3,7 +3,7 @@ import numpy as np
 
 
 def skeletonize(img):
-    #um korrekte Schwarz werte von 255 zu bekommen
+    #um korrekte weiß werte von 255 zu bekommen
     # counterX = 0
     # counterY = 0
     # for x in img:
@@ -31,7 +31,7 @@ def skeletonize(img):
         temp = cv2.subtract(img, temp)
         skel = cv2.bitwise_or(skel, temp)
         img = eroded.copy()
-        a=cv2.countNonZero(img)
+
         zeros = size - cv2.countNonZero(img)
         if zeros == size:
             done = True

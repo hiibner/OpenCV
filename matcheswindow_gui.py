@@ -144,7 +144,7 @@ class Ui_matcheswindow(object):
         self.m2.setText(_translate("MainWindow", "TextLabel"))
         self.backBtn.setText(_translate("MainWindow", "Back"))
         self.match1Btn.setText(_translate("MainWindow", "show Match 1"))
-        self.original_label.setText(_translate("MainWindow", "Original Bild"))
+        self.original_label.setText(_translate("MainWindow", ""))
 
 
 if __name__ == "__main__":

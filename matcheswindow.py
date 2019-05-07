@@ -66,6 +66,7 @@ class Matcheswindow(Ui_matcheswindow):
         if modified == True:
             # Vorschau der modifizierten Bilder
             self.modified_label.setText("Modifiziertes Bild")
+            self.original_label.setText("Original Bild")
             self.skel1.setPixmap(QPixmap(self.match1_modified))
             self.skel2.setPixmap(QPixmap(self.match2_modified))
             self.skel3.setPixmap(QPixmap(self.match3_modified))

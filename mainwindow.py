@@ -13,6 +13,8 @@ import os
 from mainwindow_gui import Ui_mainwindow
 import sys, os
 
+import time
+
 
 class Mainwindow(Ui_mainwindow):
     def __init__(self, input_window):
@@ -38,7 +40,7 @@ class Mainwindow(Ui_mainwindow):
 
         self.serialized_path = None
 
-        self.knnCheckBox.setChecked(True)
+        self.ratiotestCheckBox.setChecked(True)
 
         self.fileOpenBtn.clicked.connect(self.openFile)
         self.evalBtn.clicked.connect(self.startPredictions)
@@ -62,6 +64,7 @@ class Mainwindow(Ui_mainwindow):
         self.input_directory = mydir
         self.infofenster.setText(None)
         self.serialized_path = None
+        self.directorytextfield.setText("Monogrammverzeichis ausgewählt")
 
     def choose_serialized(self):
         options = QFileDialog.Options()
@@ -71,7 +74,7 @@ class Mainwindow(Ui_mainwindow):
         fileName = tuple[0]
         if fileName != '':
             self.serialized_path = fileName
-
+        self.directorytextfield.setText("Serialisierte Daten ausgewählt")
 
     def openFile(self):
         options = QFileDialog.Options()
@@ -94,6 +97,8 @@ class Mainwindow(Ui_mainwindow):
 
 
     def startPredictions(self):
+        start = time.time()
+
         if self.input_directory == None and self.serialized_path == None :
             self.infofenster.setText("FEHLER : Kein Monogrammverzeichnis oder PickleDatei ausgewählt")
             return
@@ -104,7 +109,7 @@ class Mainwindow(Ui_mainwindow):
             skel = False
             res = False
 
-            if self.knnCheckBox.isChecked():
+            if self.ratiotestCheckBox.isChecked():
                 knn = True
 
             if self.skelCheckBox.isChecked():
@@ -120,6 +125,8 @@ class Mainwindow(Ui_mainwindow):
             self.input_window.hide()
             self.matcheswindow.show()
 
+        end = time.time()
+        print(end-start)
 
 
 if __name__ == '__main__':
